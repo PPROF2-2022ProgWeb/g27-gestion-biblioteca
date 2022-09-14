@@ -1,4 +1,4 @@
-package com.grupo27.libreria.model;
+package com.grupo27.library.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

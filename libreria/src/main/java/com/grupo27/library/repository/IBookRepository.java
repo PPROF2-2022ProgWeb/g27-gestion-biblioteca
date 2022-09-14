@@ -1,6 +1,6 @@
-package com.grupo27.libreria.repository;
+package com.grupo27.library.repository;
 
-import com.grupo27.libreria.model.Book;
+import com.grupo27.library.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

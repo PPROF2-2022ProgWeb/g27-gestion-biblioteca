@@ -1,8 +1,8 @@
-package com.grupo27.libreria.controller;
+package com.grupo27.library.controller;
 
 
-import com.grupo27.libreria.model.Book;
-import com.grupo27.libreria.service.BookService;
+import com.grupo27.library.model.Book;
+import com.grupo27.library.service.BookService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -51,7 +51,7 @@ public class BookController {
             @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("/{title}")
+    @GetMapping("title/{title}")
     public Optional<Book> findBookByTitle(@PathVariable String title) {
         LOGGER.info("Search by title Books entity");
         return bookService.findBookByTitle(title);
@@ -64,7 +64,7 @@ public class BookController {
             @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("/{category}")
+    @GetMapping("category/{category}")
     public List<Book> listBooksByCategory(@PathVariable String category) {
         LOGGER.info("List of all Books by category");
         return bookService.listBooksByCategory(category);
@@ -77,7 +77,7 @@ public class BookController {
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
     @GetMapping("author/{author}")
-    public List<Book> listBooksByAuthor(String author){
+    public List<Book> listBooksByAuthor(@PathVariable String author){
         LOGGER.info("List of all Books by author");
         return bookService.listBooksByAuthor(author);
     }
@@ -99,7 +99,7 @@ public class BookController {
 
     /* POST */
 
-    @ApiOperation(value = "Insertion of a new registry in Products entity"
+    @ApiOperation(value = "Insertion of a new registry in Books entity"
             ,notes = "")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),

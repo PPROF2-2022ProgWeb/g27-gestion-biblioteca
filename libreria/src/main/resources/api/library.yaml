@@ -1,0 +1,772 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8082
+basePath: /
+tags:
+  - name: book-controller
+    description: Book Controller
+  - name: loan-controller
+    description: Loan Controller
+  - name: user-controller
+    description: User Controller
+paths:
+  /books:
+    get:
+      tags:
+        - book-controller
+      summary: List of all Books
+      operationId: findAllUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Book'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /books/author/{author}:
+    get:
+      tags:
+        - book-controller
+      summary: List of all Books by author
+      operationId: listBooksByAuthorUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: author
+          in: path
+          description: author
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Book'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /books/category/{category}:
+    get:
+      tags:
+        - book-controller
+      summary: List of all Books by category
+      operationId: listBooksByCategoryUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: category
+          in: path
+          description: category
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Book'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /books/id/{id}:
+    get:
+      tags:
+        - book-controller
+      summary: Search by Id in Books entity
+      operationId: findByIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/Book'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /books/save:
+    post:
+      tags:
+        - book-controller
+      summary: Insertion of a new registry in Books entity
+      operationId: saveUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: b
+          description: b
+          required: true
+          schema:
+            $ref: '#/definitions/Book'
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/ResponseEntity'
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /books/title/{title}:
+    get:
+      tags:
+        - book-controller
+      summary: Search by title in Books entity
+      operationId: findBookByTitleUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: title
+          in: path
+          description: title
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/Book'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /loans:
+    get:
+      tags:
+        - loan-controller
+      summary: List of all Loans
+      operationId: findAllUsingGET_1
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Loan'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /loans/book/{title}:
+    get:
+      tags:
+        - loan-controller
+      summary: List of all Loans by book
+      operationId: listLoansByBookUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: title
+          in: path
+          description: title
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Loan'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /loans/date:
+    get:
+      tags:
+        - loan-controller
+      summary: List of all Loans by date range
+      operationId: listLoansByDateUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: dateOut
+          in: query
+          description: dateOut
+          required: false
+          type: string
+        - name: dateReturn
+          in: query
+          description: dateReturn
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Loan'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /loans/datesAndUser:
+    get:
+      tags:
+        - loan-controller
+      summary: List of available loans filtered by user and dates
+      operationId: listLoansByUserAndDateUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: dateOut
+          in: query
+          description: dateOut
+          required: false
+          type: string
+        - name: dateReturn
+          in: query
+          description: dateReturn
+          required: false
+          type: string
+        - name: lastName
+          in: query
+          description: lastName
+          required: false
+          type: string
+        - name: name
+          in: query
+          description: name
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Loan'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /loans/id/{id}:
+    get:
+      tags:
+        - loan-controller
+      summary: Search by Id in Loans entity
+      operationId: findByIdUsingGET_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/Loan'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /loans/save:
+    post:
+      tags:
+        - loan-controller
+      summary: Insertion of a new registry in Loans entity
+      operationId: saveUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: l
+          description: l
+          required: true
+          schema:
+            $ref: '#/definitions/Loan'
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/ResponseEntity'
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /loans/user:
+    get:
+      tags:
+        - loan-controller
+      summary: List of all Loans by user
+      operationId: listLoansByUserUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: lastName
+          in: query
+          description: lastName
+          required: true
+          type: string
+        - name: name
+          in: query
+          description: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Loan'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /users:
+    get:
+      tags:
+        - user-controller
+      summary: List of all Users
+      operationId: findAllUsingGET_2
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /users/delete/{id}:
+    delete:
+      tags:
+        - user-controller
+      summary: Deletion of a record in Users entity by id
+      operationId: deleteProductUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/ResponseEntity'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Unexpected error
+  /users/id/{id}:
+    get:
+      tags:
+        - user-controller
+      summary: Search by Id in Users entity
+      operationId: findByIdUsingGET_2
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /users/name:
+    get:
+      tags:
+        - user-controller
+      summary: Search by name in Users entity
+      operationId: findUserByNameUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: lastName
+          in: query
+          description: lastName
+          required: true
+          type: string
+        - name: name
+          in: query
+          description: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /users/save:
+    post:
+      tags:
+        - user-controller
+      summary: Insertion of a new registry in Users entity
+      operationId: saveUsingPOST_2
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: u
+          description: u
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/ResponseEntity'
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+  /users/update:
+    put:
+      tags:
+        - user-controller
+      summary: Update by id of a record in Users entity
+      operationId: updateProductUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: newU
+          description: newU
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: OK. The resource is obtained correctly
+          schema:
+            $ref: '#/definitions/User'
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+definitions:
+  Book:
+    type: object
+    properties:
+      author:
+        type: string
+      available:
+        type: integer
+        format: int32
+      category:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      edit:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lang:
+        type: string
+      pages:
+        type: integer
+        format: int32
+      stock:
+        type: integer
+        format: int32
+      title:
+        type: string
+    title: Book
+  Loan:
+    type: object
+    properties:
+      book:
+        $ref: '#/definitions/Book'
+      dateOut:
+        type: string
+      dateReturn:
+        type: string
+      id:
+        type: integer
+        format: int64
+      user:
+        $ref: '#/definitions/User'
+    title: Loan
+  ResponseEntity:
+    type: object
+    properties:
+      body:
+        type: object
+      statusCode:
+        type: string
+        enum:
+          - ACCEPTED
+          - ALREADY_REPORTED
+          - BAD_GATEWAY
+          - BAD_REQUEST
+          - BANDWIDTH_LIMIT_EXCEEDED
+          - CHECKPOINT
+          - CONFLICT
+          - CONTINUE
+          - CREATED
+          - DESTINATION_LOCKED
+          - EXPECTATION_FAILED
+          - FAILED_DEPENDENCY
+          - FORBIDDEN
+          - FOUND
+          - GATEWAY_TIMEOUT
+          - GONE
+          - HTTP_VERSION_NOT_SUPPORTED
+          - IM_USED
+          - INSUFFICIENT_SPACE_ON_RESOURCE
+          - INSUFFICIENT_STORAGE
+          - INTERNAL_SERVER_ERROR
+          - I_AM_A_TEAPOT
+          - LENGTH_REQUIRED
+          - LOCKED
+          - LOOP_DETECTED
+          - METHOD_FAILURE
+          - METHOD_NOT_ALLOWED
+          - MOVED_PERMANENTLY
+          - MOVED_TEMPORARILY
+          - MULTIPLE_CHOICES
+          - MULTI_STATUS
+          - NETWORK_AUTHENTICATION_REQUIRED
+          - NON_AUTHORITATIVE_INFORMATION
+          - NOT_ACCEPTABLE
+          - NOT_EXTENDED
+          - NOT_FOUND
+          - NOT_IMPLEMENTED
+          - NOT_MODIFIED
+          - NO_CONTENT
+          - OK
+          - PARTIAL_CONTENT
+          - PAYLOAD_TOO_LARGE
+          - PAYMENT_REQUIRED
+          - PERMANENT_REDIRECT
+          - PRECONDITION_FAILED
+          - PRECONDITION_REQUIRED
+          - PROCESSING
+          - PROXY_AUTHENTICATION_REQUIRED
+          - REQUESTED_RANGE_NOT_SATISFIABLE
+          - REQUEST_ENTITY_TOO_LARGE
+          - REQUEST_HEADER_FIELDS_TOO_LARGE
+          - REQUEST_TIMEOUT
+          - REQUEST_URI_TOO_LONG
+          - RESET_CONTENT
+          - SEE_OTHER
+          - SERVICE_UNAVAILABLE
+          - SWITCHING_PROTOCOLS
+          - TEMPORARY_REDIRECT
+          - TOO_EARLY
+          - TOO_MANY_REQUESTS
+          - UNAUTHORIZED
+          - UNAVAILABLE_FOR_LEGAL_REASONS
+          - UNPROCESSABLE_ENTITY
+          - UNSUPPORTED_MEDIA_TYPE
+          - UPGRADE_REQUIRED
+          - URI_TOO_LONG
+          - USE_PROXY
+          - VARIANT_ALSO_NEGOTIATES
+      statusCodeValue:
+        type: integer
+        format: int32
+    title: ResponseEntity
+  User:
+    type: object
+    properties:
+      address:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lastName:
+        type: string
+      name:
+        type: string
+      phone:
+        type: string
+      sanctions:
+        type: integer
+        format: int32
+      sanctionsAmount:
+        type: number
+        format: double
+    title: User

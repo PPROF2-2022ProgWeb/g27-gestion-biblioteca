@@ -1,4 +1,4 @@
-package com.grupo27.libreria;
+package com.grupo27.library;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

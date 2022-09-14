@@ -1,4 +1,4 @@
-package com.grupo27.libreria.exception;
+package com.grupo27.library.exception;
 
 
 import org.springframework.http.HttpStatus;

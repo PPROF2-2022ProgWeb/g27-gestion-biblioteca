@@ -1,4 +1,4 @@
-package com.grupo27.libreria.exception;
+package com.grupo27.library.exception;
 
 
 public class BadRequestException extends Exception {

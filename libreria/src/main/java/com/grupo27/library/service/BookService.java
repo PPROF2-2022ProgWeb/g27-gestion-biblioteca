@@ -1,9 +1,9 @@
-package com.grupo27.libreria.service;
+package com.grupo27.library.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.grupo27.libreria.model.Book;
-import com.grupo27.libreria.repository.IBookRepository;
+import com.grupo27.library.model.Book;
+import com.grupo27.library.repository.IBookRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
