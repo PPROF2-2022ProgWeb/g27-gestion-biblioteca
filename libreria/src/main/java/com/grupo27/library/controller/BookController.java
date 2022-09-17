@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.Data;
-import org.apache.logging.log4j.Logger;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,7 +29,7 @@ public class BookController {
     /* Attributes */
 
     private IEntityService<Book> bookService;
-    private Logger LOGGER;
+    private Logger LOGGER = Logger.getLogger(String.valueOf(BookController.class));;
 
     /* Methods */
     @Autowired
@@ -97,7 +97,7 @@ public class BookController {
             @ApiResponse(code = 500, message = "Unexpected error") })
     @GetMapping()
     public List<Book> findAll() {
-        LOGGER.error("List of all Books");
+        LOGGER.info("List of all Books");
         return bookService.findAll();
     }
 
@@ -117,7 +117,7 @@ public class BookController {
         ResponseEntity<Book> resp;
         if (((BookService)bookService).findBookByTitle(b.getTitle()).isPresent()) {
             resp = new ResponseEntity("The book is already registered!", HttpStatus.CONFLICT);
-            LOGGER.error("The book is already registered!");
+            LOGGER.info("The book is already registered!");
         } else {
             resp = new ResponseEntity<Book>(bookService.save(b), HttpStatus.CREATED);
             LOGGER.info("Book registered correctly");
