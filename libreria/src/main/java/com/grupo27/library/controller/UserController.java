@@ -1,10 +1,8 @@
 package com.grupo27.library.controller;
 
 import com.grupo27.library.exception.BadRequestException;
-import com.grupo27.library.model.Book;
 import com.grupo27.library.model.User;
-import com.grupo27.library.service.BookService;
-import com.grupo27.library.service.UserService;
+import com.grupo27.library.service.impl.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

@@ -1,8 +1,9 @@
-package com.grupo27.library.service;
+package com.grupo27.library.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo27.library.model.Loan;
 import com.grupo27.library.repository.ILoanRepository;
+import com.grupo27.library.service.IEntityService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Data
-@Service
-public class LoanService {
+@Service("loanService")
+public class LoanService implements IEntityService<Loan> {
 
     @Autowired
     private ILoanRepository loanRepository;

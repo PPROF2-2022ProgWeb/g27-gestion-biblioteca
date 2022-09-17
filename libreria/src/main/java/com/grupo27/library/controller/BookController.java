@@ -2,20 +2,22 @@ package com.grupo27.library.controller;
 
 
 import com.grupo27.library.model.Book;
-import com.grupo27.library.service.BookService;
+import com.grupo27.library.service.IEntityService;
+import com.grupo27.library.service.impl.BookService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
+
 
 @CrossOrigin
 @ControllerAdvice
@@ -25,12 +27,16 @@ import java.util.logging.Logger;
 public class BookController {
 
     /* Attributes */
-    @Autowired
-    private BookService bookService;
-    private final Logger LOGGER = Logger.getLogger(String.valueOf(BookController.class));
 
+    private IEntityService<Book> bookService;
+    private Logger LOGGER;
 
     /* Methods */
+    @Autowired
+    public BookController(@Qualifier("bookService")IEntityService<Book> bookService) {
+        this.bookService = bookService;
+    }
+
     /* GET */
 
     @ApiOperation(value = "Search by Id in Books entity"
@@ -40,7 +46,7 @@ public class BookController {
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
     @GetMapping("id/{id}")
-    public Optional<Book> findById(@PathVariable Long id) {
+    public Optional findById(@PathVariable Long id) {
         LOGGER.info("Search by Id in Books entity");
         return bookService.findById(id);//.orElse(null);
     }
@@ -54,7 +60,7 @@ public class BookController {
     @GetMapping("title/{title}")
     public Optional<Book> findBookByTitle(@PathVariable String title) {
         LOGGER.info("Search by title Books entity");
-        return bookService.findBookByTitle(title);
+        return ((BookService)bookService).findBookByTitle(title);
     }
 
 
@@ -67,7 +73,7 @@ public class BookController {
     @GetMapping("category/{category}")
     public List<Book> listBooksByCategory(@PathVariable String category) {
         LOGGER.info("List of all Books by category");
-        return bookService.listBooksByCategory(category);
+        return ((BookService)bookService).listBooksByCategory(category);
     }
 
     @ApiOperation(value = "List of all Books by author"
@@ -79,7 +85,7 @@ public class BookController {
     @GetMapping("author/{author}")
     public List<Book> listBooksByAuthor(@PathVariable String author){
         LOGGER.info("List of all Books by author");
-        return bookService.listBooksByAuthor(author);
+        return ((BookService)bookService).listBooksByAuthor(author);
     }
 
 
@@ -91,7 +97,7 @@ public class BookController {
             @ApiResponse(code = 500, message = "Unexpected error") })
     @GetMapping()
     public List<Book> findAll() {
-        LOGGER.info("List of all Books");
+        LOGGER.error("List of all Books");
         return bookService.findAll();
     }
 
@@ -109,9 +115,9 @@ public class BookController {
     @PostMapping("/save")
     public ResponseEntity save(@RequestBody Book b) {
         ResponseEntity<Book> resp;
-        if (bookService.findBookByTitle(b.getTitle()).isPresent()) {
+        if (((BookService)bookService).findBookByTitle(b.getTitle()).isPresent()) {
             resp = new ResponseEntity("The book is already registered!", HttpStatus.CONFLICT);
-            LOGGER.info("The book is already registered!");
+            LOGGER.error("The book is already registered!");
         } else {
             resp = new ResponseEntity<Book>(bookService.save(b), HttpStatus.CREATED);
             LOGGER.info("Book registered correctly");
@@ -138,7 +144,7 @@ public class BookController {
             LOGGER.info("Product updated successfully");
         }else{
             resp = new ResponseEntity("Product not found!", HttpStatus.NOT_FOUND);
-            LOGGER.info("Product not found!");
+            LOGGER.error("Product not found!");
         }
         return resp;
     }
@@ -165,7 +171,7 @@ public class BookController {
             LOGGER.info("Product deleted successfully");
         } else {
             resp = new ResponseEntity("Product not found!", HttpStatus.NOT_FOUND);
-            LOGGER.info("Product not found!");
+            LOGGER.error("Product not found!");
         }
         return resp;
     }*/

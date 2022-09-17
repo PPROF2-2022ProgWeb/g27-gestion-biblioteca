@@ -1,23 +1,20 @@
-package com.grupo27.library.service;
+package com.grupo27.library.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.grupo27.library.model.Loan;
 import com.grupo27.library.model.User;
-import com.grupo27.library.repository.ILoanRepository;
 import com.grupo27.library.repository.IUserRepository;
+import com.grupo27.library.service.IEntityService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 @Data
-@Service
-public class UserService {
+@Service("userService")
+public class UserService implements IEntityService<User> {
     @Autowired
     private IUserRepository userRepository;
     private final Logger LOGGER = Logger.getLogger((String.valueOf(UserService.class)));

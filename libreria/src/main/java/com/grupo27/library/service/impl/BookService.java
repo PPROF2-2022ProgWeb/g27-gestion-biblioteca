@@ -1,9 +1,10 @@
-package com.grupo27.library.service;
+package com.grupo27.library.service.impl;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupo27.library.model.Book;
 import com.grupo27.library.repository.IBookRepository;
+import com.grupo27.library.service.IEntityService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Data
-@Service
-public class BookService {
+@Service("bookService")
+public class BookService implements IEntityService<Book> {
     @Autowired
     private IBookRepository bookRepository;
     private final Logger LOGGER = Logger.getLogger((String.valueOf(BookService.class)));
@@ -46,6 +47,8 @@ public class BookService {
         LOGGER.info("List of all available books");
         return books;
     }
+
+
 
     public Book update(Book newBook) {
         Book book = bookRepository.findById(newBook.getId()).get();

@@ -2,12 +2,14 @@ package com.grupo27.library.controller;
 
 
 import com.grupo27.library.model.Loan;
-import com.grupo27.library.service.LoanService;
+import com.grupo27.library.service.IEntityService;
+import com.grupo27.library.service.impl.LoanService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,12 +28,16 @@ public class LoanController {
 
 
     /* Attributes */
-    @Autowired
-    private LoanService loanService;
+
+    private IEntityService<Loan> loanService;
     private final Logger LOGGER = Logger.getLogger(String.valueOf(LoanController.class));
 
 
     /* Methods */
+    @Autowired
+    public LoanController(@Qualifier("loanService") LoanService loanService) {
+        this.loanService = loanService;
+    }
     /* GET */
 
     @ApiOperation(value = "Search by Id in Loans entity"
@@ -56,7 +62,7 @@ public class LoanController {
     @GetMapping("book/{title}")
     public List<Loan> listLoansByBook(@PathVariable String title) {
         LOGGER.info("List of all Loans by book");
-        return loanService.listLoansByBook(title);
+        return ((LoanService)loanService).listLoansByBook(title);
     }
 
     @ApiOperation(value = "List of all Loans by user"
@@ -68,7 +74,7 @@ public class LoanController {
     @GetMapping("user")
     public List<Loan> listLoansByUser(@RequestParam(required = true) String name, @RequestParam(required = true) String lastName){
         LOGGER.info("List of all Loans by user");
-        return loanService.listLoansByUser(name, lastName);
+        return ((LoanService)loanService).listLoansByUser(name, lastName);
     }
 
 
@@ -93,7 +99,7 @@ public class LoanController {
     @GetMapping("date")
     public List<Loan> listLoansByDate(@RequestParam(required = false) String dateOut, @RequestParam(required = false) String dateReturn){
         LOGGER.info("List of all Loans by date");
-        return loanService.listLoansByDate(dateOut, dateReturn);
+        return ((LoanService)loanService).listLoansByDate(dateOut, dateReturn);
     }
 
     @ApiOperation(value = "List of available loans filtered by user and dates"
@@ -108,7 +114,7 @@ public class LoanController {
         List<Loan> filteredLoans = new ArrayList<>();
 
         if (dateOut != null && dateReturn != null && name != null && lastName != null) {
-            List<Loan> filteredByDate =  loanService.listLoansByDate(dateOut, dateReturn);
+            List<Loan> filteredByDate =  ((LoanService)loanService).listLoansByDate(dateOut, dateReturn);
             for (Loan l : filteredByDate) {
                 if (l.getUser().getName().equalsIgnoreCase(name) && l.getUser().getLastName().equalsIgnoreCase(lastName)) {
                     filteredLoans.add(l);
@@ -117,11 +123,11 @@ public class LoanController {
         }
 
         if (dateOut != null && dateReturn != null && name == null && lastName == null) {
-            filteredLoans = loanService.listLoansByDate(dateOut, dateReturn);
+            filteredLoans = ((LoanService)loanService).listLoansByDate(dateOut, dateReturn);
         }
 
         if (dateOut == null && dateReturn == null && name != null && lastName != null) {
-            filteredLoans = loanService.listLoansByUser(name, lastName);
+            filteredLoans = ((LoanService)loanService).listLoansByUser(name, lastName);
         }
 
         return filteredLoans;
