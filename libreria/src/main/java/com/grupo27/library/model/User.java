@@ -21,6 +21,8 @@ public class User {
     private String lastName;
     private String address;
     private String phone;
+    private String email;
+    private String password;
     private int sanctions;
     private double sanctionsAmount;
 

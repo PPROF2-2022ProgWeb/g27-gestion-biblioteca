@@ -53,7 +53,19 @@ public class UserController {
     @GetMapping("name")
     public Optional<User> findUserByName(@RequestParam(required = true) String name, @RequestParam(required = true) String lastName) {
         LOGGER.info("Search by Id in Users entity");
-        return userService.findUserByNamer(name, lastName);//.orElse(null);
+        return userService.findUserByName(name, lastName);//.orElse(null);
+    }
+
+    @ApiOperation(value = "Search by email in Users entity"
+            ,notes = "")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = User.class ),
+            @ApiResponse(code = 400, message = "Bad Request", response = String.class),
+            @ApiResponse(code = 500, message = "Unexpected error") })
+    @GetMapping("email/{email}")
+    public Optional<User> findUserByEmail(@PathVariable String email) {
+        LOGGER.info("Search by email in Users entity");
+        return userService.findUserByEmail(email);//.orElse(null);
     }
 
     @ApiOperation(value = "List of all Users"

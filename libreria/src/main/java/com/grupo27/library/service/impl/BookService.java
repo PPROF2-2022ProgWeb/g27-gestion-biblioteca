@@ -23,11 +23,7 @@ public class BookService implements IEntityService<Book> {
     @Autowired
     private ObjectMapper mapper;
 
-    public Book save(Book book)  {
-        bookRepository.save(mapper.convertValue(book, Book.class));
-        LOGGER.info("Book saved successfully");
-        return book;
-    }
+
 
 
     public Optional<Book> findById(Long id) {
@@ -39,6 +35,12 @@ public class BookService implements IEntityService<Book> {
             LOGGER.info("The id does not match with any existing book");
         }
         return b;
+    }
+
+    public Book save(Book book)  {
+        bookRepository.save(mapper.convertValue(book, Book.class));
+        LOGGER.info("Book saved successfully");
+        return book;
     }
 
 

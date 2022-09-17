@@ -45,9 +45,14 @@ public class UserService implements IEntityService<User> {
         return u;
     }
 
-    public Optional<User> findUserByNamer(String name, String lastName){
+    public Optional<User> findUserByName(String name, String lastName){
         LOGGER.info("Search by name in Users entity");
         return userRepository.findUserByName(name, lastName);
+    }
+
+    public Optional<User> findUserByEmail(String email){
+        LOGGER.info("Search by email in Users entity");
+        return userRepository.findUserByEmail(email);
     }
 
     public List<User> findAll() {
