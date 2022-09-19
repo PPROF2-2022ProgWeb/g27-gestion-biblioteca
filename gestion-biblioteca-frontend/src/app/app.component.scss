@@ -9,7 +9,6 @@ html {
 
 main {
   height: -webkit-fill-available;
-  max-height: 100vh;
   overflow-x: auto;
   margin: 2.5rem 1rem;
 }
@@ -25,6 +24,10 @@ main {
     flex-direction: row;
   }
   main {
-    margin: 3rem 0;
+    width: 100%;
+    margin: 2rem 0;
+    padding-left: 280px;
+    padding-right: 1rem;
   }
+
 }

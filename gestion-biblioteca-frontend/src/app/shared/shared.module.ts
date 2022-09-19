@@ -1,12 +1,17 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { PaginationComponent } from './pagination/pagination.component';
+import { SearchInputComponent } from './search-input/search-input.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PaginationComponent,
+    SearchInputComponent
+  ],
   imports: [
-    CommonModule
-  ]
+    CommonModule, RouterModule
+  ],
+  exports: [PaginationComponent, SearchInputComponent]
 })
 export class SharedModule { }

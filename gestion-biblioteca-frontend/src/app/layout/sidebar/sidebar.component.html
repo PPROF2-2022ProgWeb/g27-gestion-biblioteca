@@ -26,9 +26,9 @@
       <li class="nav-item">
         <a
           routerLink="/"
-          [ngClass]="
-            this.router.url == '/' ? 'nav-link active' : 'nav-link text-white'
-          "
+          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLinkActive]="['active']"
+          class="nav-link text-white"
           aria-current="page"
         >
           <img
@@ -44,11 +44,8 @@
       <li>
         <a
           routerLink="libros"
-          [ngClass]="
-            this.router.url == '/libros'
-              ? 'nav-link active'
-              : 'nav-link text-white'
-          "
+          [routerLinkActive]="['active']"
+          class="nav-link text-white"
         >
           <img
             src="../../../assets/icons/book.svg"
@@ -63,11 +60,8 @@
       <li>
         <a
           routerLink="prestamos"
-          [ngClass]="
-            this.router.url == '/prestamos'
-              ? 'nav-link active'
-              : 'nav-link text-white'
-          "
+          [routerLinkActive]="['active']"
+          class="nav-link text-white"
         >
           <img
             src="../../../assets/icons/loan.svg"
@@ -82,11 +76,8 @@
       <li>
         <a
           routerLink="condiciones-de-uso"
-          [ngClass]="
-            this.router.url == '/condiciones-de-uso'
-              ? 'nav-link active'
-              : 'nav-link text-white'
-          "
+          [routerLinkActive]="['active']"
+          class="nav-link text-white"
         >
           <img
             src="../../../assets/icons/rules.svg"

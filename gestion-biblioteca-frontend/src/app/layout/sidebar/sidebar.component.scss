@@ -1,16 +1,17 @@
 .Sidebar {
   position: absolute;
-  height: 100vh;
-  width: 280px;
+  height: 100%;
 }
 
 .Sidebar--opened {
+  width: 280px;
   opacity: 1;
   position: relative;
   transition: all 0.3s ease-in;
 }
 
 .Sidebar--closed {
+  width: 0;
   opacity: 0;
   position: absolute;
   left: -280px;
@@ -111,13 +112,14 @@ a {
 
 @media screen and (min-width: 900px) {
   .Sidebar {
-    position: relative;
+    position: fixed;
   }
   .Sidebar--opened,
   .Sidebar--closed {
+    width: 280px;
     opacity: 1;
     position: relative;
-    transition: all 0.3s ease-in;
+    transition: left 0.3s ease-in;
     left: 0;
   }
   .Sidebar__Brand {
