@@ -1,10 +1,11 @@
 import {
   Component,
   OnInit,
+  OnChanges,
   Input,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagination',
@@ -14,23 +15,42 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 /*
- *   Para utilizarlo solo hay que pasarle la cantidad total de páginas deseadas (desde el 1)
+ *   Para utilizarlo solo hay que pasarle la cantidad total de páginas deseadas (contando desde el 1)
  *   Centrado por defecto, para personalizar la posición hay que ubicarlo dentro de otra etiqueta y
- *   darle el estilo deseado
+ *   darle los estilos deseados
  */
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
   @Input() numPages: number = 3;
   pages = new Array(this.numPages);
-  activePage = 1;
 
-  constructor(private route: ActivatedRoute) {}
+  getCurrentPage = () => {
+    return parseInt(this.route.snapshot.queryParamMap.get('page') || '1');
+  };
+
+  prevPage = () => {
+    const currentPage = this.getCurrentPage();
+    if (currentPage > 1) {
+      return currentPage - 1;
+    } else {
+      return 1;
+    }
+  };
+
+  nextPage = () => {
+    const currentPage = this.getCurrentPage();
+    if (currentPage < this.numPages) {
+      return currentPage + 1;
+    } else {
+      return this.numPages;
+    }
+  };
+
+  constructor(protected route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.pages = new Array(this.numPages);
-    this.route.queryParams.subscribe((params) => {
-      console.log(params);
-      this.activePage = parseInt(params['page']) | 1;
-      console.log(this.activePage);
-    });
+    this.router.navigate([], { queryParams: { page: this.getCurrentPage() } });
   }
+
+  ngOnChanges() {}
 }
