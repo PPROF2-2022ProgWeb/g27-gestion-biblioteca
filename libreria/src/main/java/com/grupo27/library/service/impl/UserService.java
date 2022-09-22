@@ -15,24 +15,21 @@ import java.util.logging.Logger;
 @Data
 @Service("userService")
 public class UserService implements IEntityService<User> {
-    @Autowired
+
     private IUserRepository userRepository;
     private final Logger LOGGER = Logger.getLogger((String.valueOf(UserService.class)));
-
-    @Autowired
     private ObjectMapper mapper;
 
+    @Autowired
     public UserService(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     public User save(User user)  {
         userRepository.save(mapper.convertValue(user, User.class));
         LOGGER.info("New user registered successfully");
         return user;
     }
-
 
     public Optional<User> findById(Long id) {
         LOGGER.info("Search by id in Users entity");
@@ -75,17 +72,12 @@ public class UserService implements IEntityService<User> {
         return user;
     }
 
-
     public void delete(Long id) {
-        if(userRepository.findById(id).isPresent()){
+        if (userRepository.findById(id).isPresent()) {
             userRepository.deleteById(id);
             LOGGER.info("User deleted correctly!");
         } else {
             LOGGER.info("User was not found!");
         }
     }
-
-
-
-
 }

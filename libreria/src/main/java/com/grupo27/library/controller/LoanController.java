@@ -26,9 +26,6 @@ import java.util.logging.Logger;
 @Data
 public class LoanController {
 
-
-    /* Attributes */
-
     private IEntityService<Loan> loanService;
     private final Logger LOGGER = Logger.getLogger(String.valueOf(LoanController.class));
 
