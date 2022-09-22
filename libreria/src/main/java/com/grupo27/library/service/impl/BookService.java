@@ -91,6 +91,11 @@ public class BookService implements IEntityService<Book> {
         return book;
     }
 
+    public List<Book> listBooksByTitle(String title){
+        LOGGER.info("List of all books by title");
+        return bookRepository.listBooksByTitle(title);
+    }
+
     public List<Book> listBooksByCategory(String category){
         LOGGER.info("List of all books by category");
         return bookRepository.listBooksByCategory(category);
