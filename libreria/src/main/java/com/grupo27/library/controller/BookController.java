@@ -57,23 +57,12 @@ public class BookController {
             @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("title/exact/{title}")
+    @GetMapping("title/{title}")
     public Optional<Book> findBookByTitle(@PathVariable String title) {
         LOGGER.info("Search by title Books entity");
         return ((BookService)bookService).findBookByTitle(title);
     }
 
-    @ApiOperation(value = "List of all Books by title pattern"
-    ,notes = "")
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
-        @ApiResponse(code = 400, message = "Bad Request", response = String.class),
-        @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("title/{title}")
-    public List<Book> searchBooksByTitleLike(@PathVariable String title) {
-    LOGGER.info("List of all Books by title pattern");
-    return ((BookService)bookService).searchBooksByTitleLike(title);
-    }
 
     @ApiOperation(value = "List of all Books by category"
             ,notes = "")
@@ -81,22 +70,10 @@ public class BookController {
             @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("category/exact/{category}")
+    @GetMapping("category/{category}")
     public List<Book> listBooksByCategory(@PathVariable String category) {
         LOGGER.info("List of all Books by category");
         return ((BookService)bookService).listBooksByCategory(category);
-    }
-
-    @ApiOperation(value = "List of all Books by category pattern"
-    ,notes = "")
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
-        @ApiResponse(code = 400, message = "Bad Request", response = String.class),
-        @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("category/{category}")
-    public List<Book> searchBooksByCategoryLike(@PathVariable String category) {
-    LOGGER.info("List of all Books by category pattern");
-    return ((BookService)bookService).searchBooksByCategoryLike(category);
     }
 
     @ApiOperation(value = "List of all Books by author"
@@ -105,22 +82,10 @@ public class BookController {
             @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("author/exact/{author}")
+    @GetMapping("author/{author}")
     public List<Book> listBooksByAuthor(@PathVariable String author){
         LOGGER.info("List of all Books by author");
         return ((BookService)bookService).listBooksByAuthor(author);
-    }
-
-    @ApiOperation(value = "List of all Books by author pattern"
-    ,notes = "")
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
-        @ApiResponse(code = 400, message = "Bad Request", response = String.class),
-        @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("author/{author}")
-    public List<Book> searchBooksByAuthorLike(@PathVariable String author) {
-    LOGGER.info("List of all Books by author pattern");
-    return ((BookService)bookService).searchBooksByAuthorLike(author);
     }
 
 
