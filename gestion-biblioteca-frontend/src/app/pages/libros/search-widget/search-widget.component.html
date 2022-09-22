@@ -1,12 +1,11 @@
 <div class="SearchWidget">
-  <select class="form-select" aria-label="Buscar por...">
-    <option selected>Buscar por...</option>
-    <option value="isbn">Buscar por ISBN</option>
-    <option value="title">Buscar por Título</option>
-    <option value="author">Buscar por Autor</option>
-    <option value="category">Buscar por Género</option>
+  <select class="form-select" aria-label="Buscar por..." [(ngModel)]="selectedSearchOption" name="option"
+    [compareWith]="compareByValue">
+    <option *ngFor="let option of searchOptions;let i = index" [ngValue]="option">
+      {{option.placeholder}}</option>
   </select>
-  <div style="width: 100%">
-    <app-search-input placeholder="Buscar por título"></app-search-input>
+  <div class="SearchWidget__TextField">
+    <app-search-input placeholder="{{selectedSearchOption.placeholder}}" (textSearchEvent)="searchBy($event)">
+    </app-search-input>
   </div>
 </div>
