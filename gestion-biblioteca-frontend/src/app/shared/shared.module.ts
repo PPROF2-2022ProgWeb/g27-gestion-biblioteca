@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SearchInputComponent } from './search-input/search-input.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,7 @@ import { SearchInputComponent } from './search-input/search-input.component';
     SearchInputComponent
   ],
   imports: [
-    CommonModule, RouterModule
+    CommonModule, RouterModule, FormsModule
   ],
   exports: [PaginationComponent, SearchInputComponent]
 })

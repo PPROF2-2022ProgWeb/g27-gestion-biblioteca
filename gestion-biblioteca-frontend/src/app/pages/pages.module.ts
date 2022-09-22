@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,7 +8,7 @@ import { SearchWidgetComponent } from './libros/search-widget/search-widget.comp
 
 @NgModule({
   declarations: [NotFoundComponent, LibrosComponent, SearchWidgetComponent],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, FormsModule],
   exports: [NotFoundComponent, LibrosComponent]
 })
-export class PagesModule {}
+export class PagesModule { }
