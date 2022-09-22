@@ -1,0 +1,25 @@
+.SearchWidget {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+select {
+  width: 400px;
+  height: 38px;
+}
+
+.SearchWidget__TextField {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  select {
+    font-size: 0.66rem;
+    width: 100px;
+  }
+
+  .SearchWidget {
+    gap: 0.5rem;
+  }
+}
