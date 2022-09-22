@@ -1,0 +1,33 @@
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+main {
+  height: -webkit-fill-available;
+  overflow-x: auto;
+  margin: 2.5rem 1rem;
+}
+
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 900px) {
+  .Wrapper {
+    flex-direction: row;
+  }
+  main {
+    width: 100%;
+    margin: 2rem 0;
+    padding-left: 280px;
+    padding-right: 1rem;
+  }
+
+}

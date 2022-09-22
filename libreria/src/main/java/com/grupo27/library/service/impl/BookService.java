@@ -91,13 +91,29 @@ public class BookService implements IEntityService<Book> {
         return book;
     }
 
+    public List<Book> searchBooksByTitleLike(String title){
+        LOGGER.info("Search by title pattern matching in Book entity");
+        return bookRepository.searchBooksByTitleLike(title);
+    }
+    
     public List<Book> listBooksByCategory(String category){
         LOGGER.info("List of all books by category");
         return bookRepository.listBooksByCategory(category);
+    }
+
+    public List<Book> searchBooksByCategoryLike(String category){
+        LOGGER.info("Search by category pattern matching in Book entity");
+        return bookRepository.searchBooksByCategoryLike(category);
     }
 
     public List<Book> listBooksByAuthor(String author){
         LOGGER.info("List of all books by author");
         return bookRepository.listBooksByAuthor(author);
     }
+
+    public List<Book> searchBooksByAuthorLike(String author){
+        LOGGER.info("Search by author pattern matching in Book entity");
+        return bookRepository.searchBooksByAuthorLike(author);
+    }
+
 }
