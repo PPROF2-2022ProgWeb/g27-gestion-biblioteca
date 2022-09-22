@@ -72,9 +72,9 @@ public class LoanController {
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
     @GetMapping("user")
-    public List<Loan> listLoansByUser(@RequestParam(required = true) String name, @RequestParam(required = true) String lastName){
+    public List<Loan> listLoansByUser(@RequestParam(required = true) String email){
         LOGGER.info("List of all Loans by user");
-        return ((LoanService)loanService).listLoansByUser(name, lastName);
+        return ((LoanService)loanService).listLoansByUser(email);
     }
 
 
@@ -109,25 +109,25 @@ public class LoanController {
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
     @GetMapping("datesAndUser")
-    public List<Loan> listLoansByUserAndDate(@RequestParam(required = false) String name, @RequestParam(required = false) String lastName, @RequestParam(required = false) String dateOut, @RequestParam(required = false) String dateReturn) {
+    public List<Loan> listLoansByUserAndDate(@RequestParam(required = false) String email, @RequestParam(required = false) String dateOut, @RequestParam(required = false) String dateReturn) {
 
         List<Loan> filteredLoans = new ArrayList<>();
 
-        if (dateOut != null && dateReturn != null && name != null && lastName != null) {
+        if (dateOut != null && dateReturn != null && email != null) {
             List<Loan> filteredByDate =  ((LoanService)loanService).listLoansByDate(dateOut, dateReturn);
             for (Loan l : filteredByDate) {
-                if (l.getUser().getName().equalsIgnoreCase(name) && l.getUser().getLastName().equalsIgnoreCase(lastName)) {
+                if (l.getUser().getEmail().equals(email)) {
                     filteredLoans.add(l);
                 }
             }
         }
 
-        if (dateOut != null && dateReturn != null && name == null && lastName == null) {
+        if (dateOut != null && dateReturn != null && email == null) {
             filteredLoans = ((LoanService)loanService).listLoansByDate(dateOut, dateReturn);
         }
 
-        if (dateOut == null && dateReturn == null && name != null && lastName != null) {
-            filteredLoans = ((LoanService)loanService).listLoansByUser(name, lastName);
+        if (dateOut == null && dateReturn == null && email != null) {
+            filteredLoans = ((LoanService)loanService).listLoansByUser(email);
         }
 
         return filteredLoans;
