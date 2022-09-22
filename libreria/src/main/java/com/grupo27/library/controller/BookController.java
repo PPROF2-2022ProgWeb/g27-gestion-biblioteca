@@ -57,11 +57,23 @@ public class BookController {
             @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
-    @GetMapping("title/{title}")
+    @GetMapping("title/exact/{title}")
     public Optional<Book> findBookByTitle(@PathVariable String title) {
         LOGGER.info("Search by title Books entity");
         return ((BookService)bookService).findBookByTitle(title);
     }
+
+    @ApiOperation(value = "List of all Books by title pattern"
+    ,notes = "")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "OK. The resource is obtained correctly", response = Book.class ),
+        @ApiResponse(code = 400, message = "Bad Request", response = String.class),
+        @ApiResponse(code = 500, message = "Unexpected error") })
+    @GetMapping("title/{title}")
+    public List<Book> searchByTitleLike(@PathVariable String title) {
+    LOGGER.info("List of all Books by title pattern");
+    return ((BookService)bookService).searchByTitleLike(title);
+}
 
 
     @ApiOperation(value = "List of all Books by category"
