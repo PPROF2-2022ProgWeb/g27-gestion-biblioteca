@@ -8,15 +8,13 @@ import { tap } from 'rxjs';
   templateUrl: './libros.component.html',
   styleUrls: ['./libros.component.scss'],
 })
-
 export class LibrosComponent implements OnInit {
   protected books: IBook[] | undefined;
-  protected isLoading: boolean = false;
+  protected isLoading: boolean = true;
 
-  constructor(private booksService: BooksService) { }
-
-  ngOnInit(): void {
-    this.booksService.getBooksBy({})
+  constructor(private booksService: BooksService) {
+    this.booksService
+      .getBooks()
       .pipe(
         tap((response) => {
           this.books = response;
@@ -27,28 +25,5 @@ export class LibrosComponent implements OnInit {
       .subscribe();
   }
 
-  search(params: any) {
-    if (params.textField !== "") {
-      this.booksService.getBooksBy({ type: params.type, arg: params.textField })
-        .pipe(
-          tap((response) => {
-            if (params.textField !== "") {
-              if (Array.isArray(response) && response) {
-                this.books = response;
-              } else if (!Array.isArray(response) && response) {
-                this.books = [response]
-              } else { this.books = [] }
-            }
-            this.isLoading = false;
-            return response;
-          })
-        )
-        .subscribe();
-    }
-    else {
-      location.reload();
-    }
-
-  }
-
+  ngOnInit(): void {}
 }

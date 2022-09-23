@@ -2,11 +2,12 @@ import { LibrosComponent } from './pages/libros/libros.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 
 const routes: Routes = [
   { path: '', component: NotFoundComponent },
   { path: 'libros', component: LibrosComponent },
-  { path: 'prestamos', component: NotFoundComponent },
+  { path: 'prestamos', component: PrestamosComponent },
   { path: 'perfil', component: NotFoundComponent },
   { path: 'perfil/opciones', component: NotFoundComponent },
   { path: 'condiciones-de-uso', component: NotFoundComponent },
