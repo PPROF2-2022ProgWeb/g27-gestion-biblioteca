@@ -1,4 +1,4 @@
-<section id="libros" class="Libros" *ngIf="books && !isLoading; else Spinner">
+<section id="libros" class="Libros" *ngIf="books && !isLoading;">
   <h1 class="mb-4">Libros</h1>
   <app-search-widget (searchEvent)="search($event)"></app-search-widget>
   <table class="table table-responsive table-bordered">
@@ -31,10 +31,11 @@
   <h2 *ngIf="!books.length && !isLoading">Libro no encontrado.</h2>
   <app-pagination *ngIf="books.length" [numPages]="4"></app-pagination>
 </section>
-<ng-template #Spinner>
-  <div class="Spinner">
-    <div class="spinner-border text-dark" role="status">
-      <span class="visually-hidden">Cargando...</span>
-    </div>
+<div class="Spinner" *ngIf="isLoading">
+  <div class="spinner-border text-dark" role="status">
+    <span class="visually-hidden">Cargando...</span>
   </div>
-</ng-template>
+</div>
+<app-error-feedback *ngIf="!isLoading && error"
+  message="El servidor no respondió. Asegúrese de que se esté ejecutando la API y la base de datos.">
+</app-error-feedback>
