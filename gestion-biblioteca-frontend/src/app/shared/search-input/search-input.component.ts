@@ -1,23 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.scss'],
 })
-
+/*TODO Hacerlo funcional y reutilizable */
 export class SearchInputComponent implements OnInit {
   @Input() placeholder: string = '';
-  @Output() textSearchEvent = new EventEmitter<string>();
 
-  textField: string = "";
+  constructor() {}
 
-  sendSearchField(value: string) {
-    this.textSearchEvent.emit(value);
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

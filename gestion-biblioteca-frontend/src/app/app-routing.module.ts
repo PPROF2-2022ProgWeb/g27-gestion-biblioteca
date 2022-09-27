@@ -4,6 +4,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { Component, NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
+import { PrestamosComponent } from './pages/prestamos/prestamos.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 
 const routes: Routes = [
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'notfound', component: NotFoundComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'libros', component: LibrosComponent },
-  { path: 'prestamos', component: NotFoundComponent },
+  { path: 'prestamos', component: PrestamosComponent },
   { path: 'perfil', component: NotFoundComponent },
   { path: 'perfil/opciones', component: NotFoundComponent },
   { path: 'condiciones-de-uso', component: NotFoundComponent },

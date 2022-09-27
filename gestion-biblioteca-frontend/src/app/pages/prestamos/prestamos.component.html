@@ -1,0 +1,37 @@
+<section id="prestamos">
+    <h1 class="mb-4">Préstamos</h1>
+    <table class="table table-responsive table-bordered">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col" class="p-3 col-md-1">ID</th>
+          <th scope="col" class="p-3 col-md-2">Usuario</th>
+          <th scope="col" class="p-3 col-md-2">Libro</th>
+          <th scope="col" class="p-3 col-md-2">Salida</th>
+          <th scope="col" class="p-3 col-md-1">Devuelto</th>
+        </tr>
+      </thead>
+      
+      <tbody *ngIf="loans; else Spinner">
+        <tr *ngFor="let loan of loans">
+          <th scope="row" class="p-3 Isbn"><span></span>{{ loan.id }}</th>
+          <td class="p-3"><span></span>{{ loan.user }}</td>
+          <th scope="row" class="p-3 Isbn"><span></span>{{ loan.book }}</th>
+          <td class="p-3"><span></span>{{  loan.dateOut }}</td>
+          <td class="p-3"><span></span>{{ loan.dateReturn }}</td> 
+        </tr>
+      </tbody>
+
+      <ng-template #Spinner>
+        <div
+          class="spinner-border text-dark position-absolute top-50 start-50 translate-middle"
+          role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </ng-template>
+
+    </table>
+
+    <app-pagination *ngIf="loans" [numPages]="4"></app-pagination>
+
+  </section>
+  
