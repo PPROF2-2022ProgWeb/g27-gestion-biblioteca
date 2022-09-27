@@ -8,9 +8,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 
+// Import the module from the SDK
+import { AuthModule } from '@auth0/auth0-angular';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, LayoutModule, HttpClientModule, CommonModule, PagesModule],
+  imports: [BrowserModule, AppRoutingModule, LayoutModule, HttpClientModule, CommonModule, PagesModule, 
+      // Import the module into the application, with configuration
+      AuthModule.forRoot({
+        domain: 'dev-teuamxoo.us.auth0.com',
+        clientId: '4P3UAxGKdBppbYbwHX73UHOEOWEfK1dg'
+      }),],
   providers: [],
   bootstrap: [AppComponent],
 })
