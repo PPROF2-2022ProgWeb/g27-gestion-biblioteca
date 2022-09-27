@@ -1,3 +1,4 @@
+import { PrestamosComponent } from './prestamos/prestamos.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -8,9 +9,8 @@ import { SearchWidgetComponent } from './libros/search-widget/search-widget.comp
 import { InicioComponent } from './inicio/inicio.component';
 import { DashboardComponent } from './usuarios/dashboard/dashboard.component';
 
-
 @NgModule({
-  declarations: [NotFoundComponent, LibrosComponent, SearchWidgetComponent, InicioComponent, DashboardComponent],
+  declarations: [NotFoundComponent, LibrosComponent, SearchWidgetComponent, InicioComponent, DashboardComponent, PrestamosComponent],
   imports: [CommonModule, SharedModule, FormsModule],
   exports: [NotFoundComponent, LibrosComponent, InicioComponent, DashboardComponent]
 })

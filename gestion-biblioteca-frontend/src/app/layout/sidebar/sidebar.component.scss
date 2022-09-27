@@ -1,6 +1,8 @@
 .Sidebar {
-  position: absolute;
+  position: fixed;
+  z-index: 99999;
   height: 100%;
+  font-weight: 500;
 }
 
 .Sidebar--opened {
@@ -29,6 +31,11 @@ a {
   margin-top: 3rem;
   margin-bottom: 0.5rem;
 }
+
+.Sidebar__Title {
+  font-size: 1.4rem;
+}
+
 .bi {
   vertical-align: -0.125em;
   pointer-events: none;
