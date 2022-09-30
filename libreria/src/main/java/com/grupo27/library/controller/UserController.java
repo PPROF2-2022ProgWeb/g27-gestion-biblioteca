@@ -30,14 +30,11 @@ public class UserController {
     private IEntityService<User> userService;
     private final Logger LOGGER = Logger.getLogger(String.valueOf(UserController.class));
 
-
+    /* Methods */
+    @Autowired
     public UserController(@Qualifier("userService") IEntityService<User> userService) {
         this.userService = userService;
     }
-
-    /* Methods */
-    @Autowired
-
 
     /* GET */
 
