@@ -1,4 +1,4 @@
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1150px) {
   .Nav__MenuIco--closed,
   .Nav__MenuIco--open {
     position: absolute;
@@ -6,7 +6,7 @@
     left: 15px;
     top: 20px;
   }
-
+  
   .Nav__MenuIco--closed > div,
   .Nav__MenuIco--open > div {
     width: 30px;

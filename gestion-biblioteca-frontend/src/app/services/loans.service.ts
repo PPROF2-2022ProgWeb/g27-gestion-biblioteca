@@ -1,3 +1,5 @@
+import { IUser } from './../models/IUser';
+import { IBook } from './../models/IBook';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -5,7 +7,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-
+  
 export class LoansService {
   constructor(private http: HttpClient) {}
 
@@ -33,4 +35,18 @@ export class LoansService {
     return this.http.get<any>(`http://localhost:8082/loans/user/${user}`);
   }
   
+  public postLoan(book: IBook, user: IUser): Observable<any> {
+    const currentDate = new Date();
+    const returnDate = new Date();
+    returnDate.setDate(currentDate.getDate() + 15);
+
+    return this.http.post<any>('http://localhost:8082/loans/save', {
+        "book": book,
+        "dateOut": currentDate,
+        "dateReturn": returnDate,
+        "id": null,
+        "user": user
+    });
+  }
+
 }

@@ -1,37 +1,41 @@
-<section id="prestamos">
-    <h1 class="mb-4">Préstamos</h1>
-    <table class="table table-responsive table-bordered">
-      <thead>
-        <tr class="table-dark">
-          <th scope="col" class="p-3 col-md-1">ID</th>
-          <th scope="col" class="p-3 col-md-2">Usuario</th>
-          <th scope="col" class="p-3 col-md-2">Libro</th>
-          <th scope="col" class="p-3 col-md-2">Salida</th>
-          <th scope="col" class="p-3 col-md-1">Devuelto</th>
-        </tr>
-      </thead>
+<section id="prestamos" *ngIf="loans && !isLoading;">
+  <h1 class="mb-4">Préstamos</h1>
+  <table class="table table-responsive table-bordered">
       
-      <tbody *ngIf="loans; else Spinner">
-        <tr *ngFor="let loan of loans">
-          <th scope="row" class="p-3 Isbn"><span></span>{{ loan.id }}</th>
-          <td class="p-3"><span></span>{{ loan.user }}</td>
-          <th scope="row" class="p-3 Isbn"><span></span>{{ loan.book }}</th>
-          <td class="p-3"><span></span>{{  loan.dateOut }}</td>
-          <td class="p-3"><span></span>{{ loan.dateReturn }}</td> 
-        </tr>
-      </tbody>
+    <thead>
+      <tr class="table-dark">
+        <th scope="col" class="p-3 col-md-1">ID</th>
+        <th scope="col" class="p-3 col-md-2">ISBN</th>
+        <th scope="col" class="p-3 col-md-2">Libro</th>
+        <th scope="col" class="p-3 col-md-2">Fecha de préstamo</th>
+        <th scope="col" class="p-3 col-md-1">Fecha de devolución</th>
+      </tr>
+    </thead>
 
-      <ng-template #Spinner>
-        <div
-          class="spinner-border text-dark position-absolute top-50 start-50 translate-middle"
-          role="status">
-          <span class="visually-hidden">Cargando...</span>
-        </div>
-      </ng-template>
+    <tbody *ngIf="loans && !isLoading;">
+      <tr *ngFor="let loan of loans">
+        <th scope="row" class="p-3 Id"><span>ID</span>{{ loan.id }}</th>
+        <td class="p-3"><span>ISBN</span>{{ loan.book.id }}</td>
+        <td class="p-3"><span>Libro</span>{{ loan.book.title }}</td>
+        <td class="p-3"><span>Fecha de préstamo</span>{{ loan.dateOut | date: 'dd/MM/yyyy' }}</td>
+        <td class="p-3"><span>Fecha de devolución</span>{{ loan.dateReturn | date: 'dd/MM/yyyy' }} <div
+            class="text-primary"> {{'( ' + getDaysLeftToReturn(loan.dateReturn) + ' días restantes )'}}
+          </div>
+        </td>
+      </tr>
+    </tbody>
 
-    </table>
-
-    <app-pagination *ngIf="loans" [numPages]="4"></app-pagination>
-
-  </section>
+  </table>
   
+  <p *ngIf="!loans.length && !isLoading && !error">No hay préstamos</p>
+</section>
+
+<div class="Spinner" *ngIf="isLoading">
+  <div class="spinner-border text-dark" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+
+<app-error-feedback *ngIf="!isLoading && !loans"
+  message="El servidor no respondió. Asegúrese de que se esté ejecutando la API y la base de datos.">
+</app-error-feedback>

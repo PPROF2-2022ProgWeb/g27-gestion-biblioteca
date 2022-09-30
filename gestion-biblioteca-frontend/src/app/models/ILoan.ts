@@ -1,7 +1,9 @@
+import { IUser } from './IUser';
+import { IBook } from './IBook';
 export interface ILoan {
     id: number;
     dateOut: string,
-    dateReturn:string;
-    book:number;
-    user:number;
+    dateReturn: string;
+    book: IBook;
+    user: IUser;
 }
