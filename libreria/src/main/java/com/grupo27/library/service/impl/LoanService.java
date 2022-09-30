@@ -83,9 +83,9 @@ public class LoanService implements IEntityService<Loan> {
         return loanRepository.listLoansByBook(title);
     }
 
-    public List<Loan> listLoansByUser(String name, String lastName){
+    public List<Loan> listLoansByUser(String email){
         LOGGER.info("List of all loans by user");
-        return loanRepository.listLoansByUserName(name, lastName);
+        return loanRepository.listLoansByUser(email);
     }
 
     public List<Loan> listLoansByDate(String dateOut, String dateReturn) {
@@ -110,7 +110,5 @@ public class LoanService implements IEntityService<Loan> {
         LOGGER.info("List of all loans by date");
         return filteredLoans;
     }
-
-
 
 }

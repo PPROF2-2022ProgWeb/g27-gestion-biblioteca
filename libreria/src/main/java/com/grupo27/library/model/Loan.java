@@ -32,7 +32,4 @@ public class Loan {
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
-
-
-
 }
