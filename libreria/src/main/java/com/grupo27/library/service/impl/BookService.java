@@ -19,11 +19,8 @@ public class BookService implements IEntityService<Book> {
     @Autowired
     private IBookRepository bookRepository;
     private final Logger LOGGER = Logger.getLogger((String.valueOf(BookService.class)));
-
     @Autowired
     private ObjectMapper mapper;
-
-
 
 
     public Optional<Book> findById(Long id) {
@@ -49,7 +46,6 @@ public class BookService implements IEntityService<Book> {
         LOGGER.info("List of all available books");
         return books;
     }
-
 
 
     public Book update(Book newBook) {

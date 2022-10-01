@@ -2,18 +2,18 @@
   <h1 class="mb-4">Libros</h1>
   <app-search-widget (searchEvent)="search($event)"></app-search-widget>
   <table class="table table-responsive table-bordered">
+
     <thead>
       <tr class="table-dark">
-        <th scope="col" class="p-3 col-md-1">ISBN</th>
-        <th scope="col" class="p-3 col-md-2">Título</th>
-        <th scope="col" class="p-3 col-md-2">Autor</th>
-        <th scope="col" class="p-3 col-md-2">Editorial</th>
-        <th scope="col" class="p-3 col-md-1">Género</th>
-        <th scope="col" class="p-3 col-md-1"></th>
+        <th scope="col" class="col-1 p-3">ISBN</th>
+        <th scope="col" class="col-2 p-3">Título</th>
+        <th scope="col" class="col-2 p-3">Autor</th>
+        <th scope="col" class="col-2 p-3">Editorial</th>
+        <th scope="col" class="col-1 p-3">Género</th>
+        <th scope="col" class="col-1 p-3"></th>
       </tr>
     </thead>
     <tbody>
-
       <tr *ngFor="let book of books">
         <th scope="row" class="p-3 Isbn"><span>ISBN</span>{{ book.id }}</th>
         <td class="p-3"><span>Título</span>{{ book.title }}</td>
@@ -21,21 +21,58 @@
         <td class="p-3"><span>Editorial</span>{{ book.edit }}</td>
         <td class="p-3"><span>Género</span>{{ book.category }}</td>
         <td class="align-middle p-3">
-          <button type="button" class="btn btn-primary Request">
+          <button type="button" class="btn btn-primary Request" (click)="requestBook(book)" data-bs-toggle="modal"
+            data-bs-target="#bookLoan">
             Solicitar
           </button>
         </td>
       </tr>
     </tbody>
+
   </table>
+
   <h2 *ngIf="!books.length && !isLoading">Libro no encontrado.</h2>
+  <!--  Pendiente paginación desde Spring Boot
   <app-pagination *ngIf="books.length" [numPages]="4"></app-pagination>
+  -->
 </section>
+
 <div class="Spinner" *ngIf="isLoading">
   <div class="spinner-border text-dark" role="status">
     <span class="visually-hidden">Cargando...</span>
   </div>
 </div>
+
 <app-error-feedback *ngIf="!isLoading && error"
   message="El servidor no respondió. Asegúrese de que se esté ejecutando la API y la base de datos.">
 </app-error-feedback>
+
+<div class="modal fade" id="bookLoan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <ng-container *ngIf="!requestLoanError.error">
+          <img src="../../../assets/checked.gif" alt="Operación exitosa" width="100px">
+          <p>Préstamo realizado con éxito.</p>
+          <p>Tiene 15 días para realizar la devolución</p>
+        </ng-container>
+        <ng-container *ngIf="requestLoanError.error">
+          <img src="../../../assets/wrong.gif" alt="Error" width="100px">
+          <p>Inicie sesión para continuar</p>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+        <button *ngIf="!requestLoanError.error" type="button" class="btn btn-primary" data-bs-dismiss="modal"><a
+            class="text-white text-decoration-none" [routerLink]="['/prestamos']"
+            routerLinkActive="router-link-active">Ver préstamos</a></button>
+        <button *ngIf="requestLoanError.error" type="button" class="btn btn-primary" data-bs-dismiss="modal"><a
+            class="text-white text-decoration-none" [routerLink]="['/login']"
+            routerLinkActive="router-link-active">Iniciar sesión</a></button>
+      </div>
+    </div>
+  </div>
+</div>

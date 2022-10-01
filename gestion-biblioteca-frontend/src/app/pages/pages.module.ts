@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { PrestamosComponent } from './prestamos/prestamos.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from './../shared/shared.module';
@@ -11,7 +12,7 @@ import { DashboardComponent } from './usuarios/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [NotFoundComponent, LibrosComponent, SearchWidgetComponent, InicioComponent, DashboardComponent, PrestamosComponent],
-  imports: [CommonModule, SharedModule, FormsModule],
+  imports: [CommonModule, SharedModule, FormsModule, RouterModule],
   exports: [NotFoundComponent, LibrosComponent, InicioComponent, DashboardComponent]
 })
 

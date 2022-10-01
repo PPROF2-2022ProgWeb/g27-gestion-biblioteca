@@ -17,8 +17,8 @@ public interface ILoanRepository extends JpaRepository<Loan, Long> {
     @Query("SELECT l FROM Loan l WHERE l.dateReturn = ?1")
     List<Loan> listLoansByReturnDate(String dateReturn);
 
-    @Query("SELECT l FROM Loan l WHERE l.user.name = ?1 AND l.user.lastName = ?2")
-    List<Loan> listLoansByUserName(String name, String lastName);
+    @Query("SELECT l FROM Loan l WHERE l.user.email = ?1")
+    List<Loan> listLoansByUser(String email);
 
     @Query("SELECT l FROM Loan l WHERE l.book.title = ?1")
     List<Loan> listLoansByBook(String title);

@@ -26,8 +26,6 @@ import java.util.Optional;
 @Data
 public class BookController {
 
-    /* Attributes */
-
     private IEntityService<Book> bookService;
     private Logger LOGGER = Logger.getLogger(String.valueOf(BookController.class));;
 
@@ -46,7 +44,7 @@ public class BookController {
             @ApiResponse(code = 400, message = "Bad Request", response = String.class),
             @ApiResponse(code = 500, message = "Unexpected error") })
     @GetMapping("id/{id}")
-    public Optional findById(@PathVariable Long id) {
+    public Optional<Book> findById(@PathVariable Long id) {
         LOGGER.info("Search by Id in Books entity");
         return bookService.findById(id);//.orElse(null);
     }

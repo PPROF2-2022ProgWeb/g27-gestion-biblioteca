@@ -23,10 +23,5 @@ export class BooksService {
         return this.http.get<any>(`${API_URL}books`);
     }
   }
-
-  /* private createBook(book: IBook): Observable<any> {
-    return this.http.post<any>('http://localhost:8082/books/save', {
-      body: JSON.stringify(book),
-    });
-  } */
+  
 }

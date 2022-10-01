@@ -2,12 +2,14 @@ package com.grupo27.library.controller;
 
 import com.grupo27.library.exception.BadRequestException;
 import com.grupo27.library.model.User;
+import com.grupo27.library.service.IEntityService;
 import com.grupo27.library.service.impl.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +26,16 @@ import java.util.logging.Logger;
 public class UserController {
 
     /* Attributes */
-    @Autowired
-    private UserService userService;
+
+    private IEntityService<User> userService;
     private final Logger LOGGER = Logger.getLogger(String.valueOf(UserController.class));
 
-
     /* Methods */
+    @Autowired
+    public UserController(@Qualifier("userService") IEntityService<User> userService) {
+        this.userService = userService;
+    }
+
     /* GET */
 
     @ApiOperation(value = "Search by Id in Users entity"
@@ -53,7 +59,7 @@ public class UserController {
     @GetMapping("name")
     public Optional<User> findUserByName(@RequestParam(required = true) String name, @RequestParam(required = true) String lastName) {
         LOGGER.info("Search by Id in Users entity");
-        return userService.findUserByName(name, lastName);//.orElse(null);
+        return ((UserService)userService).findUserByName(name, lastName);//.orElse(null);
     }
 
     @ApiOperation(value = "Search by email in Users entity"
@@ -65,7 +71,7 @@ public class UserController {
     @GetMapping("email/{email}")
     public Optional<User> findUserByEmail(@PathVariable String email) {
         LOGGER.info("Search by email in Users entity");
-        return userService.findUserByEmail(email);//.orElse(null);
+        return ((UserService)userService).findUserByEmail(email);//.orElse(null);
     }
 
     @ApiOperation(value = "List of all Users"

@@ -25,7 +25,13 @@ tr:hover {
   overflow: hidden;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 700px) and (max-width: 1000px) {
+  .p-3 {
+    padding: 1rem .5rem !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
   .Isbn {
     background: #212529;
     color: #fff;
